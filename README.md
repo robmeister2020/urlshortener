@@ -4,7 +4,7 @@
 
 
 ## index.html
-# There is an index.html file in the root of the project. Once the container is running, you can open this to see an input field for your url.
+### There is an index.html file in the root of the project. Once the container is running, you can open this to see an input field for your url.
 
 
 ## Building the Project
