@@ -1,0 +1,12 @@
+<html>
+	<input type="text" id="urlInput"></input>
+	<button type="submit" onclick="submitUrl()">Submit URL</button>
+</html>
+<script>
+
+function submitUrl() {
+	var url = document.getElementById("urlInput").value;
+	window.location.href = "http://localhost:8090/createurl/?url=" + url;
+}
+
+</script>
