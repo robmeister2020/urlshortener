@@ -1,10 +1,8 @@
 package com.bobsurlshortener.urlshortener.utils;
 
 import com.bobsurlshortener.urlshortener.database.UrlDatabaseDao;
-import com.bobsurlshortener.urlshortener.services.UrlShorteningService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.boot.autoconfigure.cache.CacheProperties;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +16,15 @@ public class UrlUtil {
     private static final Logger log = LoggerFactory.getLogger(UrlUtil.class);
 
     private String ROOT_URL = "http://localhost:8090/";
+
+    String[] alphaNumericArray = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
+            "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
+            "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
+            "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
+            "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
+            "3", "4", "5", "6", "7", "8", "9"};
+
+    Random randomGenerator = new Random();
 
     public boolean isUrlValid(String rawUrl) {
         String urlForValidation = "";
@@ -45,14 +52,6 @@ public class UrlUtil {
 
         StringBuilder urlPostfix = new StringBuilder(8);
 
-        String[] alphaNumericArray = new String[]{"a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k",
-                                                  "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v",
-                                                  "w", "x", "y", "z", "A", "B", "C", "D", "E", "F", "G",
-                                                  "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R",
-                                                  "S", "T", "U", "V", "W", "X", "Y", "Z", "0", "1", "2",
-                                                  "3", "4", "5", "6", "7", "8", "9"};
-
-        Random randomGenerator = new Random();
         int randomNumber;
         while(urlPostfix.length() < 8) {
             randomNumber = randomGenerator.nextInt((alphaNumericArray.length - 1));
@@ -73,7 +72,7 @@ public class UrlUtil {
     public ResponseEntity<String> getFullUrl(String urlExtension) {
         String fullUrl = UrlDatabaseDao.getFullUrl(urlExtension);
 
-        if(!fullUrl.startsWith("http")) {
+        if(!fullUrl.isEmpty() && !fullUrl.startsWith("http")) {
             fullUrl = "http://" + fullUrl;
         }
 
