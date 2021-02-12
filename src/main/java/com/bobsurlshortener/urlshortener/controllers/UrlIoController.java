@@ -68,7 +68,7 @@ public class UrlIoController {
     )
 
     public @ResponseBody
-    ResponseEntity<String> login(@RequestBody RawUrl rawUrl) {
+    ResponseEntity<String> createUrlFromJsonBody(@RequestBody RawUrl rawUrl) {
 
         log.info("Raw URL Received: {}", rawUrl.getUrl());
 
