@@ -1,6 +1,12 @@
 # urlshortener
 ## NOTE
 ### This project was built under windows and presumes that docker has been given file sharing permission on the C: drive. If you see DB creation errors, please ensure docker has been given the correct permissions for the C drive. This can be done through Docker Desktop.
+
+
+## index.html
+# There is an index.html file in the root of the project. Once the container is running, you can open this to see an input field for your url.
+
+
 ## Building the Project
 ### In the project root, execute ./docker-prepare.sh
 
