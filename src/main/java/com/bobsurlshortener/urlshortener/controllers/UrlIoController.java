@@ -54,4 +54,26 @@ public class UrlIoController {
         ResponseEntity<String> urlShortenerResponse = urlShorteningService.getFullUrl(urlExtension);
         return urlShortenerResponse;
     }
+
+    /**
+     *
+     * @param rawUrl - Body containing a raw user-submitted URL
+     * @return ResponseEntity - Returns a shortened version of the user-submitted URL
+     */
+    @RequestMapping(
+            value = "createurl",
+            method = RequestMethod.POST,
+            produces = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE},
+            consumes = {org.springframework.http.MediaType.APPLICATION_JSON_VALUE}
+    )
+
+    public @ResponseBody
+    ResponseEntity<String> login(@RequestBody RawUrl rawUrl) {
+
+        log.info("Raw URL Received: {}", rawUrl.getUrl());
+
+        ResponseEntity<String> urlShortenerResponse = urlShorteningService.shortenUrl(rawUrl);
+
+        return urlShortenerResponse;
+    }
 }

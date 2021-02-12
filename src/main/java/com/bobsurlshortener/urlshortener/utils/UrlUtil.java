@@ -66,15 +66,19 @@ public class UrlUtil {
 
         UrlDatabaseDao.persistUrl(url, generatedUrl);
         String fullUrl = ROOT_URL + generatedUrl;
-        log.info("Generated URL: {}", fullUrl)
+        log.info("Generated URL: {}", fullUrl);
         return fullUrl;
     }
 
     public ResponseEntity<String> getFullUrl(String urlExtension) {
         String fullUrl = UrlDatabaseDao.getFullUrl(urlExtension);
 
+        if(!fullUrl.startsWith("http")) {
+            fullUrl = "http://" + fullUrl;
+        }
+
         if(fullUrl.isEmpty()) {
-            log.info("Full URL for {} not found in the DB", ROOT_URL + urlExtension)
+            log.info("Full URL for {} not found in the DB", ROOT_URL + urlExtension);
             return new ResponseEntity<String>("We don't recognise this URL", HttpStatus.BAD_REQUEST);
         } else {
             HttpHeaders headers = new HttpHeaders();
