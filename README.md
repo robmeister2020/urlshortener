@@ -10,7 +10,9 @@
 ## API Information
 ### POST Endpoint
 URL: http://localhost:8090/createurl
+
 Return Value: Shortened URL
+
 The POST endpoint accepts a request with a JSON body that looks like the following:
 
 {
